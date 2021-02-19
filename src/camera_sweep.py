@@ -100,12 +100,10 @@ class CameraSweepAS(object):
                 i += 1
                 
                 # populate the feedback message and publish it:
-                rospy.loginfo('Got image {}'.format(i))
+                rospy.loginfo('Captured image {}'.format(i))
                 self.feedback.current_image = i
-                self.feedback.current_angle = abs(self.robot_odom.yaw - start_yaw)
+                self.feedback.current_angle = abs(self.robot_odom.yaw)
                 self.actionserver.publish_feedback(self.feedback)
-
-                print("yaw: {}, init yaw: {}, delta: {}, start: {}".format(self.robot_odom.yaw, ref_yaw, abs(self.robot_odom.yaw - ref_yaw), start_yaw))
 
                 # update the reference odometry:
                 ref_yaw = self.robot_odom.yaw
