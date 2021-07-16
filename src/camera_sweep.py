@@ -30,7 +30,9 @@ class CameraSweepAS(object):
             CameraSweepAction, self.action_server_launcher, auto_start=False)
         self.actionserver.start()
 
-        self.base_image_path = '/home/student/myrosdata/week5_images'
+        self.base_image_path = '/home/student/myrosdata/actions'
+        if not os.path.exists(self.base_image_path):
+            os.makedirs(self.base_image_path)
         self.camera_subscriber = rospy.Subscriber("/camera/rgb/image_raw/compressed",
             CompressedImage, self.camera_callback)
         self.cv_image = CvBridge()
